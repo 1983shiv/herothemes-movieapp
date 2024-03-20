@@ -57,6 +57,8 @@ const MovieList = () => {
 
 
   return (
+    <>
+    {(users && typeof users === 'object' && 'name' in users ) ?  
     <div className="flex flex-col m-8 w-4/5">
       {status === 'loading' ? (
         <p>Loading...</p>
@@ -99,7 +101,9 @@ const MovieList = () => {
           </div>
         </>
       )}
-    </div>
+    </div> : <span className="flex justify-center items-center mt-8 align-middle text-4xl">Please Logged In to see the Movie list</span>
+    }
+    </>
   );
 
   // return (
