@@ -13,6 +13,7 @@ const MovieList = () => {
   const status = useSelector(selectMovieStatus)
   const userstatus = useSelector(selectUserstatus)
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const getWpUser = async () => {
@@ -37,7 +38,6 @@ const MovieList = () => {
 
   const handleAddRemoveFav = (movieId, userName) => {
     const isFav = mylist.some(fav => fav.movie_id === movieId);
-    console.log('username', userName, movieId, isFav)
     if (!isFav) {
       dispatch(addFavorite({ movie_id: movieId, movie_post_title: 'Movie Title', user: userName }));
     } else {
