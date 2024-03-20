@@ -2,9 +2,9 @@ import React from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { selectMovie, fetchMovieAsync, selectMovieStatus } from "../reducers/movieReducer";
 import { selectUsers, updateUsers, fetchUserAsync, selectUserstatus } from "../reducers/userReducer";
-import { addFavorite, removeFavorite, selectMylist } from "../reducers/mylistReducer";
-import { useEffect, useState } from "react";
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { removeFavorite, selectMylist } from "../reducers/mylistReducer";
+import { useState } from "react";
+
 
 const MyList = () => {
   const { movies } = useSelector(selectMovie);
@@ -12,12 +12,23 @@ const MyList = () => {
   const { mylist } = useSelector(selectMylist);
   const status = useSelector(selectMovieStatus)
   const userstatus = useSelector(selectUserstatus)
-  
+  const dispatch = useDispatch();
+  const [showmore, setShowmore] = useState(false)
 
   // Filter out movies that exist in the mylist
   const filteredMovies = movies.filter(movie => mylist.some(item => item.movie_id === movie.ID));
   console.log('filter', filteredMovies);
   
+  const handleRemove = (movieId, userName) => {
+    const isFav = mylist.some(fav => fav.movie_id === movieId);
+    if (isFav) {
+      dispatch(removeFavorite({ movie_id: movieId }));
+    }
+  };
+
+  const handleshowmore = () => {
+    return setShowmore(!showmore);
+  }
 
   return (
     <div className="flex flex-col m-8 w-4/5">
@@ -26,23 +37,29 @@ const MyList = () => {
       ) : (
         <ul className="flex flex-col">
           {filteredMovies.map((movie) => (
-            <li className="flex flex-row justify-between p-2 my-2 bg-gray-200 border rounded-md" key={movie.ID}>
-              <h1 className="text-4xl">{movie.post_title}</h1>
-              {/* <p className="my-2 text-xl">{movie.post_content}</p> */}
-              <p className="my-8 text-lg flex items-center">
+            <>
+            <li className="flex flex-row align-middle justify-between my-2 bg-gray-200 border rounded-md" key={movie.ID}>
+              <h1 className="flex ml-2 text-4xl items-center">{movie.post_title}</h1>
+              <p className="my-8 mr-4 text-lg flex items-center">
                 {userstatus === 'loading' ? '' : (
-                  <span onClick={() => handleAddRemoveFav(movie.ID, users.name)}>
-                    {(mylist.some(fav => fav.movie_id === movie.ID)) ? (
-                      <FaHeart className="text-red-500 cursor-pointer" />
-                    ) : (
-                      <FaRegHeart className="text-red-500 cursor-pointer" />
-                    )}
-                  </span>
+                  <>
+                  <button className="flex px-4 py-1 rounded-md bg-gray-100 mx-2" onClick={() => handleRemove(movie.ID, users.name)}>
+                    Remove
+                  </button>
+                  <button className="flex px-4 py-1 rounded-md bg-gray-100 mx-2"onClick={() => handleshowmore()}>
+                  {!showmore ? 'Show detail': "Hide details"}
+                </button>
+                </>
                 )}
               </p>
             </li>
+            {showmore && (
+              <p className="my-2 text-xl">{movie.post_content}</p>
+              )}
+            </>
           ))}
         </ul>
+        
       )}
     </div>
   )

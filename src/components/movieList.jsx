@@ -64,9 +64,9 @@ const MovieList = () => {
         <>
           <ul className="flex flex-col">
             {currentMovies.map((movie) => (
-              <li className="flex flex-row justify-between p-2 my-2 bg-gray-200 border rounded-md" key={movie.ID}>
-                <h1 className="text-4xl">{movie.post_title}</h1>
-                <p className="my-8 text-lg flex items-center">
+              <li className="flex flex-row align-middle justify-between m-2 bg-gray-200 border rounded-md" key={movie.ID}>
+                <h1 className="flex ml-2 text-4xl items-center">{movie.post_title}</h1>
+                <p className="my-8 mr-4 text-lg flex items-center">
                   {userstatus === 'loading' ? '' : (
                     <span onClick={() => handleAddRemoveFav(movie.ID, users.name)}>
                       {(mylist.some(fav => fav.movie_id === movie.ID)) ? (
