@@ -15,21 +15,6 @@ const MovieList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getUserNameFromCookie = async () => {
-      setLoading(true);
-      try {
-        const cookieUserName = document.cookie.replace(/(?:(?:^|.*;\s*)auth_user_name\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        if (cookieUserName) {
-          setUserName(cookieUserName);
-          dispatch(updateUsers(cookieUserName));
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error(err);
-        setLoading(false);
-      }
-    };
-
     const getWpUser = async () => {
       try {
         dispatch(fetchUserAsync());
@@ -37,7 +22,6 @@ const MovieList = () => {
         console.error(error)
       }
     }
-    // getUserNameFromCookie();
     const getmovies = async () => {
       try {
         dispatch(fetchMovieAsync());
