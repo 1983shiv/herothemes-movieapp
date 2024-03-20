@@ -26,8 +26,6 @@ export const userSlice = createSlice({
       .addCase(fetchUserAsync.fulfilled, (state, action) => {
         state.userstatus = 'complete';
         state.users = action.payload;
-        console.log('action', action.payload)
-        localStorage.setItem('user', action.payload.name)
       });
   }
 });

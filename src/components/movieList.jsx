@@ -35,7 +35,6 @@ const MovieList = () => {
   }, []);
 
 
-
   const handleAddRemoveFav = (movieId, userName) => {
     const isFav = mylist.some(fav => fav.movie_id === movieId);
     console.log('username', userName, movieId, isFav)

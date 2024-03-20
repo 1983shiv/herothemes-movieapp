@@ -10,13 +10,11 @@ export const mylistSlice = createSlice({
   reducers: {
     addFavorite: (state, action) => {
       state.mylist = [...state.mylist, action.payload];
-      localStorage.setItem("mylist", JSON.stringify(state.mylist));
     },
     removeFavorite: (state, action) => {
       state.mylist = state.mylist.filter(
         (movie) => movie.movie_id !== action.payload.movie_id
       );
-      localStorage.setItem("mylist", JSON.stringify(state.mylist));
     },
   },
 });

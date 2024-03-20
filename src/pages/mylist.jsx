@@ -14,25 +14,26 @@ const MyList = () => {
   const userstatus = useSelector(selectUserstatus)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getWpUser = async () => {
-      try {
-        dispatch(fetchUserAsync());
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    const getmovies = async () => {
-      try {
-        dispatch(fetchMovieAsync());
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    getWpUser();
-    getmovies();
+  
+  // useEffect(() => {
+  //   const getWpUser = async () => {
+  //     try {
+  //       dispatch(fetchUserAsync());
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   const getmovies = async () => {
+  //     try {
+  //       dispatch(fetchMovieAsync());
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+  //   getWpUser();
+  //   getmovies();
 
-  }, []);
+  // }, []);
 
 
   return (
