@@ -13,7 +13,7 @@ const MyList = () => {
   const status = useSelector(selectMovieStatus)
   const userstatus = useSelector(selectUserstatus)
   const dispatch = useDispatch();
-  const [showmore, setShowmore] = useState(false)
+  const [showmoreId, setShowmoreId] = useState(null);
 
   // Filter out movies that exist in the mylist
   const filteredMovies = movies && movies.filter(movie => mylist.some(item => item.movie_id === movie.ID));
@@ -26,8 +26,9 @@ const MyList = () => {
     }
   };
 
-  const handleshowmore = () => {
-    return setShowmore(!showmore);
+  const handleshowmore = (movieID) => {
+    // return setShowmore(!showmore);
+    setShowmoreId(showmoreId === movieID ? null : movieID);
   }
 
   return (
@@ -42,20 +43,21 @@ const MyList = () => {
             <>
             <li className="flex flex-row align-middle justify-between my-2 bg-gray-200 border rounded-md" key={movie.ID}>
               <h1 className="flex ml-2 text-4xl items-center">{movie.post_title}</h1>
+              
               <p className="my-8 mr-4 text-lg flex items-center">
                 {userstatus === 'loading' ? '' : (
                   <>
                   <button className="flex px-4 py-1 rounded-md bg-gray-100 mx-2" onClick={() => handleRemove(movie.ID, users.name)}>
                     Remove
                   </button>
-                  <button className="flex px-4 py-1 rounded-md bg-gray-100 mx-2"onClick={() => handleshowmore()}>
-                  {!showmore ? 'Show detail': "Hide details"}
+                  <button className="flex px-4 py-1 rounded-md bg-gray-100 mx-2"onClick={() => handleshowmore(movie.ID)}>
+                  {!showmoreId ? 'Show detail': "Hide details"}
                 </button>
                 </>
                 )}
               </p>
             </li>
-            {showmore && (
+            {showmoreId === movie.ID && (
               <p className="my-2 text-xl">{movie.post_content}</p>
               )}
             </>
