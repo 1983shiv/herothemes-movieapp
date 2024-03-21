@@ -2,7 +2,6 @@
   "name": "moviesapp",
   "private": true,
   "version": "1.0.0",
-  "proxy": "http://localhost/gpes/",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -17,7 +17,7 @@ const MyList = () => {
 
   // Filter out movies that exist in the mylist
   const filteredMovies = movies && movies.filter(movie => mylist.some(item => item.movie_id === movie.ID));
-  console.log('filter', filteredMovies);
+  
   
   const handleRemove = (movieId, userName) => {
     const isFav = mylist.some(fav => fav.movie_id === movieId);
@@ -40,8 +40,8 @@ const MyList = () => {
       ) : (
         <ul className="flex flex-col">
           {filteredMovies.map((movie) => (
-            <>
-            <li className="flex flex-row align-middle justify-between my-2 bg-gray-200 border rounded-md" key={movie.ID}>
+            <span key={movie.ID}>
+            <li className="flex flex-row align-middle justify-between my-2 bg-gray-200 border rounded-md" >
               <h1 className="flex ml-2 text-4xl items-center">{movie.post_title}</h1>
               
               <p className="my-8 mr-4 text-lg flex items-center">
@@ -60,7 +60,7 @@ const MyList = () => {
             {showmoreId === movie.ID && (
               <p className="my-2 text-xl">{movie.post_content}</p>
               )}
-            </>
+            </span>
           ))}
         </ul>
         
