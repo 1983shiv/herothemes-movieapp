@@ -40,7 +40,7 @@ const MovieList = () => {
   const moviesPerPage = 10;
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+  const currentMovies = movies && movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

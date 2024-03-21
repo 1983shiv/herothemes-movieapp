@@ -16,7 +16,7 @@ const MyList = () => {
   const [showmore, setShowmore] = useState(false)
 
   // Filter out movies that exist in the mylist
-  const filteredMovies = movies.filter(movie => mylist.some(item => item.movie_id === movie.ID));
+  const filteredMovies = movies && movies.filter(movie => mylist.some(item => item.movie_id === movie.ID));
   console.log('filter', filteredMovies);
   
   const handleRemove = (movieId, userName) => {
